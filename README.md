@@ -23,13 +23,24 @@ wsl --set-default-version 1
 Mở app store và cài đặt Ubuntu  
 [https://apps.microsoft.com/detail/ubuntu/9PDXGNCFSCZV?hl=vi-vn&gl=VN](https://apps.microsoft.com/detail/ubuntu-22-04-2-lts/9PN20MSR04DW?hl=vi-vn&gl=VN)
 
-Bật tự động chạy service khi wsl start  
-Mở Ubuntu chạy lệnh bên dưới
+Bật tự động chạy service khi wsl start  -> mở Ubuntu chạy lệnh bên dưới
 ~~~
 sudo nano /etc/wsl.conf
 ~~~
-Thêm vào cuối rồi Lưu và thoát: 
+Thêm vào cuối rồi Lưu và thoát:  
+```
 command="service apache2 start; service mysql start;"
+```
+
+Cấu hình wsl chạy không cần pass
+~~~
+sudo nano /etc/sudoers
+~~~
+Thêm vào cuối rồi Lưu và thoát:  
+```
+ALL ALL = (root) NOPASSWD: /usr/sbin/service  
+ten_username ALL=(ALL) NOPASSWD: ALL
+```
 
 Restart máy lại.
 
@@ -43,10 +54,6 @@ sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-
 
 ### Config Apache
 ~~~
-sudo a2enmod rewrite vhost_alias
-~~~
-
-~~~
 sudo nano /etc/apache2/apache2.conf
 ~~~
 Thêm vào cuối rồi Lưu và thoát: 
@@ -57,6 +64,7 @@ AcceptFilter http none
 
 Cài đặt vhost
 ~~~
+sudo a2enmod rewrite vhost_alias
 sudo nano /etc/apache2/sites-available/000-default.conf
 ~~~
 
@@ -77,7 +85,9 @@ Thêm vào cuối rồi Lưu và thoát:
     </Directory>
 </VirtualHost>
 ```
-
+/mnt/c/ = ổ đĩa C:\  
+/mnt/d/ = ổ đĩa D:\ trên window  
+ 
 ### Config Mysql
 ~~~
 sudo usermod -d /var/lib/mysql/ mysql
