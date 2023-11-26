@@ -23,7 +23,7 @@ wsl --set-default-version 1
 Mở app store và cài đặt Ubuntu  
 [https://apps.microsoft.com/detail/ubuntu/9PDXGNCFSCZV?hl=vi-vn&gl=VN](https://apps.microsoft.com/detail/ubuntu-22-04-2-lts/9PN20MSR04DW?hl=vi-vn&gl=VN)
 
-Bật tự động chạy service khi wsl start
+Bật tự động chạy service khi wsl start  
 Mở Ubuntu chạy lệnh bên dưới
 ~~~
 sudo nano /etc/wsl.conf
@@ -150,13 +150,19 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 
 ### Tạo DNS Wildcard
-Cài đặt Acrylic DNS Proxy
-https://mayakron.altervista.org/support/acrylic/Home.htm
+Cài đặt Acrylic DNS Proxy  
+https://mayakron.altervista.org/support/acrylic/Home.htm  
+Cấu hình  
+Mở app Acrylic chọn: File -> Open Acrylic Hosts  
+sửa 2 dòng cuối thành
+~~~
+127.0.0.1 localhost localhost.localdomain *.test
+::1 localhost localhost.localdomain *.test
+~~~
 
-Cấu hình DNS cho card mạng
-
-
-
+Cấu hình DNS Server cho card mạng  
+Ipv4: 127.0.0.1  
+Ipv6: ::1
 
 ### Cài đặt Vscode wsl extension
 https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
