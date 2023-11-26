@@ -64,7 +64,7 @@ AcceptFilter http none
 
 Cài đặt vhost
 ~~~
-sudo a2enmod rewrite vhost_alias
+sudo a2enmod rewrite vhost_alias headers
 sudo nano /etc/apache2/sites-available/000-default.conf
 ~~~
 
