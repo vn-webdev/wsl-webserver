@@ -64,6 +64,11 @@ AcceptFilter http none
 
 Cài đặt vhost
 ~~~
+sudo mkdir /home/vhost
+sudo adduser root www-data
+sudo chown -R www-data:www-data /home/vhost
+sudo chmod -R g+rwX /home/vhost
+
 sudo a2enmod rewrite vhost_alias headers
 sudo nano /etc/apache2/sites-available/000-default.conf
 ~~~
@@ -71,12 +76,12 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 Thêm vào cuối rồi Lưu và thoát:  
 ```
 <VirtualHost *:80>
-    VirtualDocumentRoot "/mnt/d/www/vhost/%-2+/dist"
+    VirtualDocumentRoot "/home/vhost/%-2+/dist"
     ServerName  vhost.test
     ServerAlias *.test
-    ErrorLog "/mnt/d/www/vhost/vhost-error.log"
+    ErrorLog "/home/vhost/vhost-error.log"
 
-    <Directory "/mnt/d/www/vhost">
+    <Directory "/home/vhost">
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
@@ -85,8 +90,6 @@ Thêm vào cuối rồi Lưu và thoát:
     </Directory>
 </VirtualHost>
 ```
-/mnt/c/ = ổ đĩa C:\  
-/mnt/d/ = ổ đĩa D:\ trên window  
  
 ### Config Mysql
 ~~~
