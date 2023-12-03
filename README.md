@@ -65,7 +65,7 @@ AcceptFilter http none
 Cài đặt vhost
 ~~~
 sudo mkdir /home/vhost
-sudo adduser root www-data
+sudo mkdir /home/vhost/log
 sudo chown -R www-data:www-data /home/vhost
 sudo chmod -R g+rwX /home/vhost
 
@@ -179,3 +179,12 @@ Ipv6: ::1
 
 ### Cài đặt Vscode wsl extension
 https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
+
+### Cấu hình thêm
+Auto connect wsl khi mở Vscode  
+Mở shortcut property -> chỗ target thêm vào cuối
+ --remote wsl+Ubuntu-22.04  
+"C:\Users\ten_user\AppData\Local\Programs\Microsoft VS Code\Code.exe" --remote wsl+Ubuntu-22.04
+
+Thư mục mặc định khi open project  
+Mở Vscode Settings -> search files.dialog  -> nhập /home/www
