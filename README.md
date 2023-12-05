@@ -64,10 +64,10 @@ AcceptFilter http none
 
 Cài đặt vhost
 ~~~
-sudo mkdir /home/vhost
-sudo mkdir /home/vhost/log
-sudo chown -R www-data:www-data /home/vhost
-sudo chmod -R g+rwX /home/vhost
+sudo mkdir /mnt/d/vhost
+sudo mkdir /mnt/d/vhost/log
+sudo chown -R www-data:www-data /mnt/d/vhost
+sudo chmod -R g+rwX /mnt/d/vhost
 
 sudo a2enmod rewrite vhost_alias headers
 sudo nano /etc/apache2/sites-available/000-default.conf
@@ -76,12 +76,12 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 Thêm vào cuối rồi Lưu và thoát:  
 ```
 <VirtualHost *:80>
-    VirtualDocumentRoot "/home/vhost/%-2+/dist"
+    VirtualDocumentRoot "/mnt/d/vhost/%-2+/dist"
     ServerName  vhost.test
     ServerAlias *.test
-    ErrorLog "/home/vhost/vhost-error.log"
+    ErrorLog "/mnt/d/vhost/vhost-error.log"
 
-    <Directory "/home/vhost">
+    <Directory "/mnt/d/vhost">
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
@@ -187,4 +187,4 @@ Mở shortcut property -> chỗ target thêm vào cuối
 "C:\Users\ten_user\AppData\Local\Programs\Microsoft VS Code\Code.exe" --remote wsl+Ubuntu-22.04
 
 Thư mục mặc định khi open project  
-Mở Vscode Settings -> search files.dialog  -> nhập /home/www
+Mở Vscode Settings -> search files.dialog  -> nhập /mnt/d/vhost
