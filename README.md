@@ -159,6 +159,11 @@ sudo service apache2 restart
 ~~~
 sudo apt-get install git curl
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install v10.24.1
+nvm alias default v10.24.1
+export NODE_OPTIONS=--max-old-space-size=8192
 ~~~
 
 
