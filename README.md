@@ -14,9 +14,11 @@ Advanced => CPU Configuration => Intel(R) Virtualization Technology => chọn En
 Mở PowerShell quyền Administrator chạy lệnh bên dưới  
 ~~~
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-
+~~~
+~~~
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-
+~~~
+~~~
 wsl --set-default-version 1
 ~~~
 
@@ -32,7 +34,7 @@ Thêm vào cuối rồi Lưu và thoát:
 command="service apache2 start; service mysql start;"
 ```
 
-Cấu hình wsl chạy không cần pass
+Cấu hình linux không hỏi pass admin
 ~~~
 sudo nano /etc/sudoers
 ~~~
@@ -62,7 +64,7 @@ AcceptFilter https none
 AcceptFilter http none
 ```
 
-Cài đặt vhost
+Cài đặt vhost [/mnt/d/] là ổ đĩa D:/ trên window 
 ~~~
 sudo mkdir /mnt/d/vhost
 sudo mkdir /mnt/d/vhost/log
@@ -163,7 +165,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install v10.24.1
 nvm alias default v10.24.1
-export NODE_OPTIONS=--max-old-space-size=8192
 ~~~
 
 
@@ -191,5 +192,5 @@ Mở shortcut property -> chỗ target thêm vào cuối
  --remote wsl+Ubuntu-22.04  
 "C:\Users\ten_user\AppData\Local\Programs\Microsoft VS Code\Code.exe" --remote wsl+Ubuntu-22.04
 
-Thư mục mặc định khi open project  
+Thư mục mặc định khi open new project  
 Mở Vscode Settings -> search files.dialog  -> nhập /mnt/d/vhost
