@@ -50,6 +50,8 @@ Restart máy lại.
 Mở Ubuntu chạy lệnh bên dưới
 ~~~
 sudo apt update && sudo apt upgrade -y
+sudo apt install lamp-server^
+
 sudo apt-get install apache2 php8.1 libapache2-mod-php8.1 mysql-server php8.1-mysql
 sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
 ~~~
