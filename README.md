@@ -77,21 +77,19 @@ sudo a2enmod rewrite vhost_alias headers
 sudo nano /etc/apache2/sites-available/000-default.conf
 ~~~
 
-Thêm vào cuối rồi Lưu và thoát:  
+Thay doi Lưu và thoát:  
 ```
 <VirtualHost *:80>
-    VirtualDocumentRoot "/mnt/d/vhost/%-2+/dist"
-    ServerName  vhost.test
-    ServerAlias *.test
-    ErrorLog "/mnt/d/vhost/vhost-error.log"
+    ServerAdmin webmaster@localhost
+    DocumentRoot /mnt/d/www
 
-    <Directory "/mnt/d/vhost">
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order allow,deny
-        Allow from all
-        Require all granted
-    </Directory>
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.*).go$
+    RewriteRule (.*) /mnt/d/www/local/%1/app/$1 [L]
+
+    RewriteCond %{HTTP_HOST} ^(.*).test$
+    RewriteRule (.*) /mnt/d/www/alive/%1/dist/$1 [L]
 </VirtualHost>
 ```
  
