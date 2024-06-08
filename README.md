@@ -196,3 +196,14 @@ Mở shortcut property -> chỗ target thêm vào cuối
 
 Thư mục mặc định khi open new project  
 Mở Vscode Settings -> search files.dialog  -> nhập /mnt/d/vhost
+
+C:\Users\ten_user\.wslconfig
+~~~
+[wsl2]
+kernelCommandLine=ipv6.disable=1
+autoMemoryReclaim=gradual  # gradual | dropcache | disabled
+networkingMode=mirrored        # mirrored | NAT | None 
+dnsTunneling=true
+firewall=false
+autoProxy=true
+~~~
