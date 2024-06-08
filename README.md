@@ -18,21 +18,16 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ~~~
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ~~~
+
+restart máy
+
 ~~~
+wsl --update
 wsl --set-default-version 1
 ~~~
 
 Mở app store và cài đặt Ubuntu  
 [https://apps.microsoft.com/detail/ubuntu/9PDXGNCFSCZV?hl=vi-vn&gl=VN](https://apps.microsoft.com/detail/ubuntu-22-04-2-lts/9PN20MSR04DW?hl=vi-vn&gl=VN)
-
-Bật tự động chạy service khi wsl start  -> mở Ubuntu chạy lệnh bên dưới
-~~~
-sudo nano /etc/wsl.conf
-~~~
-Thêm vào cuối rồi Lưu và thoát:  
-```
-command="service apache2 start; service mysql start;"
-```
 
 Cấu hình linux không hỏi pass admin
 ~~~
@@ -44,7 +39,15 @@ ALL ALL = (root) NOPASSWD: /usr/sbin/service
 ten_username ALL=(ALL) NOPASSWD: ALL
 ```
 
-Restart máy lại.
+
+Bật tự động chạy service khi wsl start  -> mở Ubuntu chạy lệnh bên dưới
+~~~
+sudo nano /etc/wsl.conf
+~~~
+Thêm vào cuối rồi Lưu và thoát:  
+```
+command="service apache2 start; service mysql start;"
+```
 
 ### Cài đặt Apache & Mysql & PHP
 Mở Ubuntu chạy lệnh bên dưới
@@ -52,28 +55,31 @@ Mở Ubuntu chạy lệnh bên dưới
 sudo apt update && sudo apt upgrade -y
 sudo apt install lamp-server^
 
-sudo apt-get install apache2 php8.1 libapache2-mod-php8.1 mysql-server php8.1-mysql
 sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
 ~~~
 
 ### Config Apache
+
+[/mnt/d/] là ổ đĩa D:/ trên window 
+
 ~~~
+sudo mkdir /mnt/d/www
+sudo mkdir /mnt/d/www/log
+sudo chown -R www-data:www-data /mnt/d/www
+sudo chmod -R g+rwX /mnt/d/www
+
+sudo a2enmod rewrite vhost_alias headers
+
 sudo nano /etc/apache2/apache2.conf
 ~~~
+
 Thêm vào cuối rồi Lưu và thoát: 
 ```
 AcceptFilter https none  
 AcceptFilter http none
 ```
 
-Cài đặt vhost [/mnt/d/] là ổ đĩa D:/ trên window 
 ~~~
-sudo mkdir /mnt/d/vhost
-sudo mkdir /mnt/d/vhost/log
-sudo chown -R www-data:www-data /mnt/d/vhost
-sudo chmod -R g+rwX /mnt/d/vhost
-
-sudo a2enmod rewrite vhost_alias headers
 sudo nano /etc/apache2/sites-available/000-default.conf
 ~~~
 
@@ -135,16 +141,10 @@ Các bước chọn:
 3. root
 
 ~~~
-sudo nano /etc/phpmyadmin/config.inc.php
+sudo nano /etc/phpmyadmin/config-db.php
 ~~~
-Tìm dòng bên dưới  
-```
-$cfg['Servers'][$i]['host'] = $dbserver;
-```
-sửa lại như sau
-```
-$cfg['Servers'][$i]['host'] = '127.0.0.1'; 
-```
+Sửa $dbuser là root
+Sửa $dbserver là 127.0.0.1
 
 Thêm Url http://localhost/phpmyadmin
 ~~~
@@ -160,7 +160,7 @@ sudo service apache2 restart
 ### Cài đặt GIT, NVM
 ~~~
 sudo apt-get install git curl
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install v10.24.1
