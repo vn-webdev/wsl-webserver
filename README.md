@@ -166,6 +166,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 nvm install v10.24.1
 nvm alias default v10.24.1
 ~~~
+Setting git cho VS Code
+https://gist.github.com/victor-perez/8ba25540394ec68b11f4b2699fb4d4ce?permalink_comment_id=2763711
 
 
 ### Tạo DNS Wildcard
