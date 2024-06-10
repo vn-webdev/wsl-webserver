@@ -1,7 +1,3 @@
-### Kiểm tra Virtualization
-Vào Task Manager > Tab Performance sẽ thấy dòng Virtualization
-Nếu nó hiển thị Disabled, thì vào BIOS bật công nghệ này lên. 
-
 Cài đặt BIOS
 
 -CPU AMD  
@@ -23,7 +19,6 @@ restart máy
 
 ~~~
 wsl --update
-wsl --set-default-version 1
 ~~~
 
 Mở app store và cài đặt Ubuntu  
@@ -60,13 +55,13 @@ sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-
 
 ### Config Apache
 
-[/mnt/d/] là ổ đĩa D:/ trên window 
+[/mnt/c/] là ổ đĩa C:/ trên window 
 
 ~~~
-sudo mkdir /mnt/d/www
-sudo mkdir /mnt/d/www/log
-sudo chown -R www-data:www-data /mnt/d/www
-sudo chmod -R g+rwX /mnt/d/www
+sudo mkdir /mnt/c/www
+sudo mkdir /mnt/c/www/log
+sudo chown -R www-data:www-data /mnt/c/www
+sudo chmod -R g+rwX /mnt/c/www
 
 sudo a2enmod rewrite vhost_alias headers
 
@@ -87,15 +82,15 @@ Thay doi Lưu và thoát:
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot /mnt/d/www
+    DocumentRoot /mnt/c/www
 
     RewriteEngine On
 
     RewriteCond %{HTTP_HOST} ^(.*).go$
-    RewriteRule (.*) /mnt/d/www/local/%1/app/$1 [L]
+    RewriteRule (.*) /mnt/c/www/local/%1/app/$1 [L]
 
     RewriteCond %{HTTP_HOST} ^(.*).test$
-    RewriteRule (.*) /mnt/d/www/alive/%1/dist/$1 [L]
+    RewriteRule (.*) /mnt/c/www/alive/%1/dist/$1 [L]
 </VirtualHost>
 ```
  
