@@ -202,3 +202,14 @@ dnsTunneling=true
 firewall=false
 autoProxy=true
 ~~~
+~~~
+gpg --generate-key
+gpg --list-secret-keys --keyid-format=long
+// rsa3072/[43B5D0B61AE8B49A] => user.signingkey
+
+git config --global commit.gpgsign true
+git config --global gpg.program gpg
+git config --global tag.gpgsign true
+git config --global user.signingkey 43B5D0B61AE8B49A
+~~~
+
