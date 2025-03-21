@@ -1,11 +1,3 @@
-Cài đặt BIOS
-
--CPU AMD  
-Overclocking => Advanced CPU configuration => svm mode => chọn Enable
-
--CPU Intel  
-Advanced => CPU Configuration => Intel(R) Virtualization Technology => chọn Enable
-
 ### Cài đặt WSL
 Mở PowerShell quyền Administrator chạy lệnh bên dưới  
 ~~~
@@ -54,14 +46,11 @@ sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-
 ~~~
 
 ### Config Apache
-
-[/mnt/c/] là ổ đĩa C:/ trên window 
-
 ~~~
-sudo mkdir /mnt/c/www
-sudo mkdir /mnt/c/www/log
-sudo chown -R www-data:www-data /mnt/c/www
-sudo chmod -R g+rwX /mnt/c/www
+sudo mkdir /home/tngoc/www
+sudo mkdir /home/tngoc/www/log
+sudo chown -R tngoc:www-data /home/tngoc/www
+sudo chmod -R g+rwX /home/tngoc/www
 
 sudo a2enmod rewrite vhost_alias headers
 
@@ -87,10 +76,10 @@ Thay doi Lưu và thoát:
     RewriteEngine On
 
     RewriteCond %{HTTP_HOST} ^(.*).go$
-    RewriteRule (.*) /mnt/c/www/local/%1/app/$1 [L]
+    RewriteRule (.*) /home/tngoc/www/local/%1/app/$1 [L]
 
     RewriteCond %{HTTP_HOST} ^(.*).test$
-    RewriteRule (.*) /mnt/c/www/alive/%1/dist/$1 [L]
+    RewriteRule (.*) /home/tngoc/www/alive/%1/dist/$1 [L]
 </VirtualHost>
 ```
  
@@ -190,9 +179,9 @@ Mở shortcut property -> chỗ target thêm vào cuối
 "C:\Users\ten_user\AppData\Local\Programs\Microsoft VS Code\Code.exe" --remote wsl+Ubuntu-22.04
 
 Thư mục mặc định khi open new project  
-Mở Vscode Settings -> search files.dialog  -> nhập /mnt/d/vhost
+Mở Vscode Settings -> search files.dialog  -> nhập /home/tngoc/www
 
-C:\Users\ten_user\.wslconfig
+.wslconfig
 ~~~
 [wsl2]
 kernelCommandLine=ipv6.disable=1
@@ -202,14 +191,3 @@ dnsTunneling=true
 firewall=false
 autoProxy=true
 ~~~
-~~~
-gpg --generate-key
-gpg --list-secret-keys --keyid-format=long
-// rsa3072/[43B5D0B61AE8B49A] => user.signingkey
-
-git config --global commit.gpgsign true
-git config --global gpg.program gpg
-git config --global tag.gpgsign true
-git config --global user.signingkey 43B5D0B61AE8B49A
-~~~
-
