@@ -47,9 +47,17 @@ sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-
 
 ### Config Apache
 ~~~
+sudo nano /etc/apache2/envvars
+~~~
+
+sửa 2 dòng này từ "www-data" thành "tngoc"
+export APACHE_RUN_USER=tngoc
+export APACHE_RUN_GROUP=tngoc
+
+~~~
 sudo mkdir /home/tngoc/www
 sudo mkdir /home/tngoc/www/log
-sudo chown -R tngoc:www-data /home/tngoc/www
+sudo chown -R tngoc:tngoc /home/tngoc/www
 sudo chmod -R g+rwX /home/tngoc/www
 
 sudo a2enmod rewrite vhost_alias headers
